@@ -2,6 +2,11 @@ public class Speise {
     private int preis;
     private String speise;
 
+    public Speise(int preis, String speise) {
+        this.preis = preis;
+        this.speise = speise;
+    }
+
     public int getPreis() {
         return preis;
     }
