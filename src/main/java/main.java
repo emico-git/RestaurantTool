@@ -1,6 +1,14 @@
+import java.util.Scanner;
+
 public class main {
     public static void main(String[] args) {
         Restaurant r = new Restaurant();
-        r.preperationMitarbeiter();
+        Scanner scan = new Scanner(System.in);
+        
+        r.preperation();
+        r.menu();
+        boolean run = true;
+        
+        
     }
 }

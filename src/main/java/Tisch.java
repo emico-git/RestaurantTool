@@ -1,5 +1,6 @@
 public class Tisch {
     private int plaetze;
+    
 
     public Tisch(){
 

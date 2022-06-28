@@ -12,11 +12,16 @@ public class Restaurant {
     private ArrayList<Tisch> tische = new ArrayList<Tisch>();
     private ArrayList<Mitarbeiter> mitarbeiter = new ArrayList<Mitarbeiter>();
     private ArrayList<Speise> speisen = new ArrayList<Speise>();
+    private ArrayList<Mitarbeiter> koeche = new ArrayList<Mitarbeiter>();
 
     public void preperation(){
         preperationTische();
         preperationGerichte();
         preperationMitarbeiter();
+    }
+
+    public void menu(){
+        grafiken();
     }
 
     public void preperationTische(){
@@ -25,7 +30,6 @@ public class Restaurant {
         int a = scan.nextInt();
         for(int i = 0; i < a; i++){
             tische.add(new Tisch(4));
-
         }
 
     }
@@ -34,11 +38,11 @@ public class Restaurant {
         Scanner scan = new Scanner(System.in);
         System.out.println("-----------Gerichte-----------");
         String input = "y";
-        while (input != "n"){
+        while (input.equals("y")){
             System.out.println("Wie heisst ihr Gericht");
             String name = scan.next();
             System.out.println("Wie viel kostet es?");
-            int preis = scan.nextInt();
+            double preis = scan.nextDouble();
             speisen.add(new Speise(preis, name));
             System.out.println("Wollen sie noch ein Gericht hinzufügen? (y/n)");
             input = scan.next();
@@ -96,13 +100,16 @@ public class Restaurant {
                         if(p.equals("Koch")){
                             job = "Koch";
                         }
-                        if(p.equals("Kochin")){
-                            job = "Kochin";
+                        if(p.equals("Köchin")){
+                            job = "Köchin";
                         }
                             break;
                     }
                 }
                 mitarbeiter.add(new Mitarbeiter(id, name, vorname, alter, lohn, job));
+                if(job.equals("Koch") || job.equals("Köchin")){
+                koeche.add(new Mitarbeiter(id, name, vorname, alter, lohn, job));
+                }
                 line = br.readLine();
             }
 
@@ -149,6 +156,51 @@ public class Restaurant {
                 }
         }
     }
+
+    public void grafiken(){
+        System.out.println("----------------Menu----------------");
+        /*
+        Küche
+        +-----------------------------------------------+
+		|                      Küche	                |		
+		|                                               |
+		|           Koch1               Koch2           |
+		|                                               |
+		+-----------------------------------------------+
+         */
+        System.out.println("+-----------------------------------------------+");
+        System.out.println("|\t\t        Küche\t\t\t|" );
+        System.out.println("|\t\t\t\t\t\t|");
+        System.out.println("|\t\t" + koeche.get(0).getName() + "\t\t" + koeche.get(1).getName() + "\t\t|");
+        System.out.println("|\t\t\t\t\t\t|");
+        System.out.println("+-----------------------------------------------+");
+
+        int counter = 0;
+        /*
+        Tische:
+        +-------------------------------+				
+		|             Tisch 1           |	
+	    |                               |   
+		|				                |
+		|                          	    | 
+		|        	                    |   
+		+-------------------------------+ 
+        */
+    
+        for (Tisch t : tische) {
+            counter++;
+            System.out.println("\t+-------------------------------+");
+            System.out.println("\t|\t      Tisch "+ counter +"\t\t|");
+            System.out.println("\t|\t\t\t\t|");
+            System.out.println("\t|\t\t\t\t|");
+            System.out.println("\t|\t\t\t\t|");
+            System.out.println("\t|\t\t\t\t|");
+            System.out.println("\t+-------------------------------+");
+        }
+        
+    }
+
+
 
     public void test(){
         
