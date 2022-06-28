@@ -46,43 +46,46 @@ public class Restaurant {
     public void preperationMitarbeiter (){
         System.out.println("Mitarbeiter.txt wird gelesen");
         try {
-            int index = 0;
-            String fileName = "D:\\OneDrive - KBW Kantonsschule Büelrain Winterthur\\01BBW\\02.5_Modul_326\\Projekt\\Projekt\\Mitarbeiter.txt";
+            String fileName = "Mitarbeiter.txt";
             FileReader fr = new FileReader(fileName);
             BufferedReader br = new BufferedReader(fr);
             String line = br.readLine();
             while (line != null) {
-                int counter = 0;
+                int  id = 0, lohn = 0, counter = 0;
+                boolean kellner = false;
+                String name = "", vorname = "", alter = "";
                 String[] lineParts = line.split(";"); // Split line at occurences of semicolon
                 for (String p : lineParts) {         // loop over all parts of the line
                     counter++;
                     switch (counter) {
                         case 1:
-
+                            id =  Integer.valueOf(p);
                             break;
 
                         case 2:
-
+                            name = p;
                             break;
 
                         case 3:
-
+                            vorname = p;
                             break;
 
                         case 4:
-
+                            alter = p;
                             break;
 
                         case 5:
-
+                            lohn =  Integer.valueOf(p);
                             break;
 
                         case 6:
-
+                        if(p.equals("Kellner") || p.equals("Kellnerin")){
+                            kellner = true;
+                        }
                             break;
                     }
                 }
-                index++;
+                mitarbeiter.add(new Mitarbeiter(id, name, vorname, alter, lohn, kellner));
                 line = br.readLine();
             }
 
