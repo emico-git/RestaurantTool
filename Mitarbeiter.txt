@@ -1,0 +1,4 @@
+1;Oswald;Oliver;18;1100;Kellner
+2;Frank;Roman;16;1400;Koch
+3;Schmid;Thierry;17;1200;Kellner
+4;Banyard;Ael;18;1300;Koch
