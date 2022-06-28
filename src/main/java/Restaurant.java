@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,6 +16,7 @@ public class Restaurant {
     public void preperation(){
         preperationTische();
         preperationGerichte();
+        preperationMitarbeiter();
     }
 
     public void preperationTische(){
@@ -46,14 +48,20 @@ public class Restaurant {
     public void preperationMitarbeiter (){
         System.out.println("Mitarbeiter.txt wird gelesen");
         try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        try {
             String fileName = "Mitarbeiter.txt";
             FileReader fr = new FileReader(fileName);
             BufferedReader br = new BufferedReader(fr);
             String line = br.readLine();
             while (line != null) {
                 int  id = 0, lohn = 0, counter = 0;
-                boolean kellner = false;
-                String name = "", vorname = "", alter = "";
+                
+                String name = "", vorname = "", alter = "", job = "";
                 String[] lineParts = line.split(";"); // Split line at occurences of semicolon
                 for (String p : lineParts) {         // loop over all parts of the line
                     counter++;
@@ -79,13 +87,22 @@ public class Restaurant {
                             break;
 
                         case 6:
-                        if(p.equals("Kellner") || p.equals("Kellnerin")){
-                            kellner = true;
+                        if(p.equals("Kellner")){
+                            job = "Kellner";
+                        }
+                        if(p.equals("Kellnerin")){
+                            job = "Kellnerin";
+                        }
+                        if(p.equals("Koch")){
+                            job = "Koch";
+                        }
+                        if(p.equals("Kochin")){
+                            job = "Kochin";
                         }
                             break;
                     }
                 }
-                mitarbeiter.add(new Mitarbeiter(id, name, vorname, alter, lohn, kellner));
+                mitarbeiter.add(new Mitarbeiter(id, name, vorname, alter, lohn, job));
                 line = br.readLine();
             }
 
@@ -94,16 +111,47 @@ public class Restaurant {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally{
-            System.out.println("--------------TEST--------------");
-            for (Ort o: orte) {
-                System.out.println("Name: " + o.getName());
-                System.out.println("X-Koordiante: " + o.getKoordinateX());
-                System.out.println("Y-Koordiante: " + o.getKoordinateY());
-                System.out.println("Startpunkt: " + o.isStarpunkt());
-                System.out.println();
-            }
-            System.out.println("--------------------------------");
+        }finally{   
+                try{
+                System.out.println("Loading Mitarbeiter.");
+                Thread.sleep(1000);
+                System.out.println("Loading Mitarbeiter..");
+                Thread.sleep(1000);
+                System.out.println("Loading Mitarbeiter...");
+                Thread.sleep(1000);
+                }catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                }
+                System.out.println("-----------Mitarbeiter-----------");
+                for(Mitarbeiter m: mitarbeiter){
+                    try{
+                    System.out.println("----------- "+ m.getId() +" -----------");
+                    System.out.println("Name: "+ "\t" + m.getVorname() + " " + m.getName());
+                    Thread.sleep(500);
+                    System.out.println("Alter: "+ "\t" + m.getAlter());
+                    Thread.sleep(500);
+                    System.out.println("Lohn: "+ "\t" + m.getLohn());
+                    Thread.sleep(500);
+                    System.out.println("Job: "+ "\t" + m.getJob());
+                    }catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
         }
+    }
+
+    public void test(){
+        
+        
     }
 }
