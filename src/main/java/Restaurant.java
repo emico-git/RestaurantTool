@@ -20,7 +20,6 @@ public class Restaurant {
         preperationMitarbeiter();
     }
 
-
     public void preperationTische(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Wie viele Tische haben sie?");
@@ -38,7 +37,7 @@ public class Restaurant {
         while (input.equals("y")){
             System.out.println("Wie heisst ihr Gericht");
             String name = scan.next();
-            System.out.println("Wie viel kostet es?");
+            System.out.println("Wie viel kostet es? (bitte nur eine Zahl, z.b 7.00)");
             double preis = scan.nextDouble();
             speisen.add(new Speise(preis, name));
             System.out.println("Wollen sie noch ein Gericht hinzufügen? (y/n)");
@@ -49,7 +48,7 @@ public class Restaurant {
     public void preperationMitarbeiter (){
         System.out.println("Mitarbeiter.txt wird gelesen");
         try {
-            Thread.sleep(4000);
+            Thread.sleep(1000);
         } catch (InterruptedException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
@@ -129,27 +128,12 @@ public class Restaurant {
                 }
                 System.out.println("-----------Mitarbeiter-----------");
                 for(Mitarbeiter m: mitarbeiter){
-                    try{
                     System.out.println("----------- "+ m.getId() +" -----------");
                     System.out.println("Name: "+ "\t" + m.getVorname() + " " + m.getName());
-                    Thread.sleep(500);
                     System.out.println("Alter: "+ "\t" + m.getAlter());
-                    Thread.sleep(500);
                     System.out.println("Lohn: "+ "\t" + m.getLohn());
-                    Thread.sleep(500);
                     System.out.println("Job: "+ "\t" + m.getJob());
-                    }catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    
 
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
                 }
         }
     }
@@ -159,8 +143,20 @@ public class Restaurant {
        TischGrafik();
     }
 
-    public void grafikenUpdaten(){
+    public void grafikenUpdatenErfassen(){
         kundenErfassen();
+        kuecheGrafik();
+        TischGrafik();
+     }
+
+     public void grafikenUpdatenReservieren(){
+         tischReservieren();
+         kuecheGrafik();
+         TischGrafik();
+     }
+
+     public void grafikenUpdatenRechnungErstellen(){
+        rechnungErstellen();
         kuecheGrafik();
         TischGrafik();
      }
@@ -176,12 +172,12 @@ public class Restaurant {
 		|                                               |
 		+-----------------------------------------------+
          */
-        System.out.println("+-----------------------------------------------+");
+        System.out.println("+-------------------------------+");
         System.out.println("|\t\t        Küche\t\t\t|" );
-        System.out.println("|\t\t\t\t\t\t|");
+        System.out.println("|\t\t\t\t\t\t\t\t|");
         System.out.println("|\t\t" + koeche.get(0).getName() + "\t\t" + koeche.get(1).getName() + "\t\t|");
-        System.out.println("|\t\t\t\t\t\t|");
-        System.out.println("+-----------------------------------------------+");
+        System.out.println("|\t\t\t\t\t\t\t\t|");
+        System.out.println("+-------------------------------+");
 
     }
 
@@ -200,54 +196,63 @@ public class Restaurant {
         for (Tisch t : tische) {
 
             counter++;
-            if(t.isFrei() == true){
-                
-                System.out.println("\t+-------------------------------+");
-                System.out.println("\t|\t      Tisch "+ counter +"\t\t|");
-                System.out.println("\t|\t\t\t\t|");
-                System.out.println("\t|\t\t\t\t|");
-                System.out.println("\t|\t\t\t\t|");
-                System.out.println("\t+-------------------------------+");
+            if(t.isFrei() == true && t.isReserviert() == false){
+
+                System.out.println("\t\t+-----------------------+");
+                System.out.println("\t\t|\t      Tisch " + counter + "\t\t|");
+                System.out.println("\t\t|\t\t\t\t\t\t|");
+                System.out.println("\t\t|\t\t\t\t\t\t|");
+                System.out.println("\t\t|\t\t\t\t\t\t|");
+                System.out.println("\t\t+-----------------------+");
             }
 
-            if(t.isFrei() == false){
+            if(t.isReserviert() == true && t.isFrei() == false){
+                System.out.println("\t\t+-----------------------+");
+                System.out.println("\t\t|\t      Tisch " + counter + "\t\t|");
+                System.out.println("\t\t|\t\t*reserviert*\t|");
+                System.out.println("\t\t|\t\t\t\t\t\t|");
+                System.out.println("\t\t|\t\t\t\t\t\t|");
+                System.out.println("\t\t+-----------------------+");
+            }
+
+            if(t.isFrei() == false && t.isReserviert() == false){
 
                 switch(t.anzKunden()){
 
                     case 1:
-                        System.out.println("\t+-------------------------------+");
-                        System.out.println("\t|\t      Tisch "+ counter +"\t\t|");
-                        System.out.println(t.getKunde(0).getVorname() + "\t|"+ t.getKunde(0).getSpeise().getSpeise() +"\t\t\t|");
-                        System.out.println("\t|\t\t\t\t|");
-                        System.out.println("\t|\t\t\t\t|");
-                        System.out.println("\t+-------------------------------+");
+                        System.out.println("\t\t+-----------------------+");
+                        System.out.println("\t\t|\t      Tisch "+ counter +"\t\t|");
+                        System.out.println( t.getKunde(0).getVorname() + "\t|\t"+ t.getKunde(0).getSpeise().getSpeise() +"\t\t\t\t|");
+                        System.out.println("\t\t|\t\t\t\t\t\t|");
+                        System.out.println("\t\t|\t\t\t\t\t\t|");
+                        System.out.println("\t\t+-----------------------+");
                         break;
                     
                     case 2:
-                        System.out.println("\t+-------------------------------+");
-                        System.out.println("\t|\t      Tisch "+ counter +"\t\t|");
-                        System.out.println(t.getKunde(0).getVorname() + "\t|"+ t.getKunde(0).getSpeise().getSpeise() +"\t\t"+ t.getKunde(1).getSpeise().getSpeise() +"\t|" + t.getKunde(1).getVorname());
-                        System.out.println("\t|\t\t\t\t|");
-                        System.out.println("\t|\t\t\t\t|");
-                        System.out.println("\t+-------------------------------+");
+                        System.out.println("\t\t+-----------------------+");
+                        System.out.println("\t\t|\t      Tisch "+ counter +"\t\t|");
+                        System.out.println(t.getKunde(0).getVorname() + "\t|\t"+ t.getKunde(0).getSpeise().getSpeise() +"\t\t"+ t.getKunde(1).getSpeise().getSpeise() +"\t|" + t.getKunde(1).getVorname());
+                        System.out.println("\t\t|\t\t\t\t\t\t|");
+                        System.out.println("\t\t|\t\t\t\t\t\t|");
+                        System.out.println("\t\t+-----------------------+");
                         break;
 
                     case 3:
-                        System.out.println("\t+-------------------------------+");
-                        System.out.println("\t|\t      Tisch "+ counter +"\t\t|");
-                        System.out.println(t.getKunde(0).getVorname() + "\t|"+ t.getKunde(0).getSpeise().getSpeise() +"\t\t"+ t.getKunde(1).getSpeise().getSpeise() +"\t|" + t.getKunde(1).getVorname());
-                        System.out.println("\t|\t\t\t\t|");
-                        System.out.println(t.getKunde(2).getVorname() + "\t|"+ t.getKunde(2).getSpeise().getSpeise() +"\t\t\t|");
-                        System.out.println("\t+-------------------------------+");
+                        System.out.println("\t\t+-----------------------+");
+                        System.out.println("\t\t|\t      Tisch "+ counter +"\t\t|");
+                        System.out.println(t.getKunde(0).getVorname() + "\t|\t"+ t.getKunde(0).getSpeise().getSpeise() +"\t\t"+ t.getKunde(1).getSpeise().getSpeise() +"\t|" + t.getKunde(1).getVorname());
+                        System.out.println("\t\t|\t\t\t\t\t\t|");
+                        System.out.println(t.getKunde(2).getVorname() + "\t|\t"+ t.getKunde(2).getSpeise().getSpeise() +"\t\t\t\t|");
+                        System.out.println("\t\t+-----------------------+");
                         break;
 
                     case 4:
-                        System.out.println("\t+-------------------------------+");
-                        System.out.println("\t|\t      Tisch "+ counter +"\t\t|");
-                        System.out.println(t.getKunde(0).getVorname() + "\t|"+ t.getKunde(0).getSpeise().getSpeise() +"\t\t"+ t.getKunde(1).getSpeise().getSpeise() +"\t|" + t.getKunde(1).getVorname());
-                        System.out.println("\t|\t\t\t\t|");
-                        System.out.println(t.getKunde(2).getVorname() + "\t|"+ t.getKunde(2).getSpeise().getSpeise() +"\t\t"+ t.getKunde(3).getSpeise().getSpeise() +"\t|" + t.getKunde(3).getVorname());
-                        System.out.println("\t+-------------------------------+");
+                        System.out.println("\t\t+-----------------------+");
+                        System.out.println("\t\t|\t      Tisch "+ counter +"\t\t|");
+                        System.out.println(t.getKunde(0).getVorname() + "\t|\t"+ t.getKunde(0).getSpeise().getSpeise() +"\t\t"+ t.getKunde(1).getSpeise().getSpeise() +"\t|" + t.getKunde(1).getVorname());
+                        System.out.println("\t\t|\t\t\t\t\t\t|");
+                        System.out.println(t.getKunde(2).getVorname() + "\t|\t"+ t.getKunde(2).getSpeise().getSpeise() +"\t\t"+ t.getKunde(3).getSpeise().getSpeise() +"\t|" + t.getKunde(3).getVorname());
+                        System.out.println("\t\t+-----------------------+");
                         break;
                 }
             }
@@ -284,8 +289,47 @@ public class Restaurant {
         }
     }
 
+    public void tischReservieren(){
+        Scanner scan = new Scanner(System.in);
+        int counter = -1;
+        System.out.println("Welchen Tisch wollen sie Reservieren");
+        int indexTisch = scan.nextInt();
+        indexTisch--;
+        if(tische.get(indexTisch).isFrei() == true){
+            tische.get(indexTisch).setReserviert(true);
+            tische.get(indexTisch).setFrei(false);
+        }else{
+            System.out.println("Der ausgewählte Tisch ist nicht Frei.");
+        }
+
+    }
+
+    public void rechnungErstellen(){
+        Scanner scan = new Scanner(System.in);
+        double total;
+        System.out.println("Für welchen Tisch wollen sie die Rechnung.");
+        int indexTisch = scan.nextInt();
+        indexTisch--;
+        if(tische.get(indexTisch).isFrei() == false){
+            Tisch tisch = tische.get(indexTisch);
+            total = tisch.rechnungTotal();
+            System.out.println("Der Totale Betrag beträgt " + total + " CHF.");
+            try {
+                Thread.sleep(8000);
+            } catch (InterruptedException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+
+
+        }else{
+            System.out.println("Niemand sitzt an dem ausgewählten Tisch.");
+        }
+    }
+
     public void test(){
-        
-        
+
+
+
     }
 }

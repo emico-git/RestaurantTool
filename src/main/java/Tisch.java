@@ -4,6 +4,7 @@ public class Tisch {
     private int plaetze;
     private ArrayList<Kunden> kunden = new ArrayList<Kunden>();
     private boolean frei = true;
+    private boolean reserviert = false;
 
     public Tisch(){
 
@@ -44,5 +45,25 @@ public class Tisch {
     public Kunden getKunde(int index){
         return kunden.get(index);
     }
-    
+
+    public boolean isReserviert() {
+        return reserviert;
+    }
+
+    public void setReserviert(boolean reserviert) {
+        this.reserviert = reserviert;
+    }
+
+    public double rechnungTotal(){
+        double total = 0;
+        for (Kunden k: kunden) {
+            total = total + k.getSpeise().getPreis();
+        }
+        for (int i = 0;i < kunden.size(); i++){
+            kunden.remove(i);
+        }
+        setFrei(true);
+        setReserviert(false);
+        return total;
+    }
 }

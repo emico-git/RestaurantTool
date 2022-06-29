@@ -4,6 +4,7 @@ public class Mitarbeiter extends Person{
     private String alter;
     private int id;
 
+
     public Mitarbeiter(int id, String name, String vorname, String alter, int lohn, String job){
         super(name, vorname);
         this.lohn = lohn;
