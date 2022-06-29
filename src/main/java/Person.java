@@ -1,3 +1,8 @@
+/**
+ * Person Oberklasse, Oberklassen von allen Personen
+ * @author Emil Udupuzhayil
+ * @version 1.0
+ */
 public class Person {
     private String name;
     private String vorname;

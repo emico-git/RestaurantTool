@@ -1,10 +1,12 @@
 import java.util.Scanner;
-
+/**
+ * @author Emil Udupuzhayil
+ * @version 1.0
+ */
 public class main {
     public static void main(String[] args) {
         Restaurant r = new Restaurant();
         Scanner scan = new Scanner(System.in);
-        r.test();
         r.preperation();
         r.grafiken();
         boolean run = true;

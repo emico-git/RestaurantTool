@@ -6,6 +6,11 @@ import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Restaurant Klassen, Herz von der Applikation, hier sind fast alle Methoden drin
+ * @author Emil Udupuzhayil
+ * @version 1.0
+ */
 public class Restaurant {
     private String name;
     private Standort standort;
@@ -14,12 +19,18 @@ public class Restaurant {
     private ArrayList<Speise> speisen = new ArrayList<Speise>();
     private ArrayList<Mitarbeiter> koeche = new ArrayList<Mitarbeiter>();
 
+    /**
+     * Hier werden die verschiedenen Methoden für die Vorbereitung der Appliktion zusammen gebracht.
+     */
     public void preperation(){
         preperationTische();
         preperationGerichte();
         preperationMitarbeiter();
     }
 
+    /**
+     *Hier werden die Anzahl die initialisiert.
+     */
     public void preperationTische(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Wie viele Tische haben sie?");
@@ -30,6 +41,9 @@ public class Restaurant {
 
     }
 
+    /**
+     *Hier werden die Gerichte initialisiert.
+     */
     public void preperationGerichte (){
         Scanner scan = new Scanner(System.in);
         System.out.println("-----------Gerichte-----------");
@@ -45,6 +59,9 @@ public class Restaurant {
         }
     }
 
+    /**
+     *Hier werden der Mitarbeiter.txt File gelesen und die Mitarbeiter initialisiert und auf der Konsole ausgegeben.
+     */
     public void preperationMitarbeiter (){
         System.out.println("Mitarbeiter.txt wird gelesen");
         try {
@@ -138,29 +155,44 @@ public class Restaurant {
         }
     }
 
+    /**
+     *Hier werden die ersten verschieden Grafik Methoden zusammen gebracht
+     */
     public void grafiken(){
        kuecheGrafik();
        TischGrafik();
     }
 
+    /**
+     *Hier werden die Grafik Methoden, für die Kunden erfassung, zusammen gebracht.
+     */
     public void grafikenUpdatenErfassen(){
         kundenErfassen();
         kuecheGrafik();
         TischGrafik();
      }
 
+    /**
+     *Hier werden die Grafik Methoden, für die Tisch reservierung, zusammen gebracht.
+     */
      public void grafikenUpdatenReservieren(){
          tischReservieren();
          kuecheGrafik();
          TischGrafik();
      }
 
+    /**
+     *Hier werden die Grafik Methoden, für die Rechnung Erstellung, zusammen gebracht.
+     */
      public void grafikenUpdatenRechnungErstellen(){
         rechnungErstellen();
         kuecheGrafik();
         TischGrafik();
      }
 
+    /**
+     *Hier wird die Küchengrafik gemacht.
+     */
     public void kuecheGrafik(){
         System.out.println("----------------Menu----------------");
         /*
@@ -181,6 +213,9 @@ public class Restaurant {
 
     }
 
+    /**
+     *Hier wird die Tisch Grafik gemacht.
+     */
     public void TischGrafik(){
         int counter = 0;
         /*
@@ -259,6 +294,9 @@ public class Restaurant {
         }
     }
 
+    /**
+     *Hier wird die Kunden Erfassung gemacht
+     */
     public void kundenErfassen(){
         Scanner scan = new Scanner(System.in);
         int tischIndex = 0;
@@ -289,6 +327,9 @@ public class Restaurant {
         }
     }
 
+    /**
+     *Hier wird die Tischreservierung gemacht.
+     */
     public void tischReservieren(){
         Scanner scan = new Scanner(System.in);
         int counter = -1;
@@ -304,6 +345,9 @@ public class Restaurant {
 
     }
 
+    /**
+     *Hier wird der zweite Teil für die Rechnung berechnung gemacht.
+     */
     public void rechnungErstellen(){
         Scanner scan = new Scanner(System.in);
         double total;
@@ -327,9 +371,5 @@ public class Restaurant {
         }
     }
 
-    public void test(){
 
-
-
-    }
 }

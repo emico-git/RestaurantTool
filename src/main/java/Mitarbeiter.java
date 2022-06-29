@@ -1,3 +1,8 @@
+/**
+ * Mitarbeiter Klasse, Hier werden die Mitarbeiter gemacht.
+ * @author Emil Udupuzhayil
+ * @version 1.0
+ */
 public class Mitarbeiter extends Person{
     private int lohn;
     private String job;
@@ -5,6 +10,9 @@ public class Mitarbeiter extends Person{
     private int id;
 
 
+    /**
+     *Hier werden Mitarbeiter initialisiert
+     */
     public Mitarbeiter(int id, String name, String vorname, String alter, int lohn, String job){
         super(name, vorname);
         this.lohn = lohn;
@@ -12,6 +20,7 @@ public class Mitarbeiter extends Person{
         this.id = id;
         this.alter = alter;
     }
+
 
     public int getLohn() {
         return lohn;

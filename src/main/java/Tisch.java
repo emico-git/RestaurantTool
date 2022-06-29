@@ -1,5 +1,9 @@
 import java.util.ArrayList;
-
+/**
+ * Tisch Klasse, hier werden gemacht und ein Teil der Rechnung berechnet.
+ * @author Emil Udupuzhayil
+ * @version 1.0
+ */
 public class Tisch {
     private int plaetze;
     private ArrayList<Kunden> kunden = new ArrayList<Kunden>();
