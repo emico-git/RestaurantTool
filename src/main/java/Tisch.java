@@ -24,18 +24,20 @@ public class Tisch {
     public void setPlaetze(int plaetze) {
         this.plaetze = plaetze;
     }
+
     public ArrayList<Kunden> getKunden() {
         return kunden;
     }
+
     public void setKunden(ArrayList<Kunden> kunden) {
         this.kunden = kunden;
     }
+
     public boolean isFrei() {
         return frei;
     }
-    public void setFrei(boolean frei) {
-        this.frei = frei;
-    }
+
+    public void setFrei(boolean frei) {this.frei = frei;}
 
     public void addKunde(String name, String vorname, Speise speise){
         kunden.add(new Kunden(name, vorname, speise ));
